@@ -8,6 +8,7 @@ from functools import partial
 import traceback
 import voxels
 import argparse
+from base_script import *
 
 
 def voxelize(in_path, res):
@@ -41,8 +42,6 @@ if __name__ == '__main__':
     parser.add_argument('-res', type=int)
 
     args = parser.parse_args()
-
-    ROOT = 'shapenet/data'
 
     p = Pool(mp.cpu_count())
     p.map(partial(voxelize, res=args.res), glob.glob( ROOT + '/*/*/'))

@@ -7,8 +7,7 @@ from multiprocessing import Pool
 import argparse
 import os
 import traceback
-
-ROOT = 'shapenet/data'
+from base_script import *
 
 
 def boundary_sampling(path):

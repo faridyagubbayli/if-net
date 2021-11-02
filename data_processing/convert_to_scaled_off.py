@@ -3,8 +3,7 @@ import glob
 import multiprocessing as mp
 from multiprocessing import Pool
 import trimesh
-
-INPUT_PATH = 'shapenet/data'
+from base_script import *
 
 def to_off(path):
 
@@ -14,7 +13,7 @@ def to_off(path):
     input_file  = path + '/isosurf.obj'
     output_file = path + '/isosurf.off'
 
-    cmd = 'meshlabserver -i {} -o {}'.format(input_file,output_file)
+    cmd = 'xvfb-run -a -s "-screen 0 800x600x24" meshlabserver -i {} -o {}'.format(input_file,output_file)
     # if you run this script on a server: comment out above line and uncomment the next line
     # cmd = 'xvfb-run -a -s "-screen 0 800x600x24" meshlabserver -i {} -o {}'.format(input_file,output_file)
     os.system(cmd)
@@ -42,4 +41,4 @@ def scale(path):
     print('Finished {}'.format(path))
 
 p = Pool(mp.cpu_count())
-p.map(scale, glob.glob( INPUT_PATH + '/*/*'))
+p.map(scale, glob.glob( ROOT + '/*/*'))

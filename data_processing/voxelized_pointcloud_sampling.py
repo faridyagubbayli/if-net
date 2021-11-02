@@ -9,8 +9,7 @@ from multiprocessing import Pool
 import argparse
 import random
 import traceback
-
-ROOT = 'shapenet/data/'
+from base_script import *
 
 def voxelized_pointcloud_sampling(path):
     try:
