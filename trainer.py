@@ -2,35 +2,13 @@
 # Developed by Farid Yagubbayli <faridyagubbayli@gmail.com>
 #
 
-import argparse
 import pytorch_lightning as pl
-
 import models.local_model as model
 from data.datamodule import DataModule
-from utils import form_expr_name
+from utils import *
 
 pl.seed_everything(100)
-
-# python train.py -posed -dist 0.5 0.5 -std_dev 0.15 0.05 -res 32 -batch_size 40 -m
-parser = argparse.ArgumentParser(
-    description='Run Model'
-)
-
-parser.add_argument('-pointcloud', dest='pointcloud', action='store_true')
-parser.add_argument('-voxels', dest='pointcloud', action='store_false')
-parser.set_defaults(pointcloud=False)
-parser.add_argument('-pc_samples' , default=3000, type=int)
-parser.add_argument('-dist','--sample_distribution', default=[0.5, 0.5], nargs='+', type=float)
-parser.add_argument('-std_dev','--sample_sigmas',default=[0.15,0.015], nargs='+', type=float)
-parser.add_argument('-batch_size' , default=30, type=int)
-parser.add_argument('-res' , default=32, type=int)
-parser.add_argument('-m','--model' , default='LocNet', type=str)
-parser.add_argument('-o','--optimizer' , default='Adam', type=str)
-
-try:
-    args = parser.parse_args()
-except:
-    args = parser.parse_known_args()[0]
+args = prepare_and_parse_args()
 
 model_map = {
     'ShapeNet32Vox': model.ShapeNet32Vox,
