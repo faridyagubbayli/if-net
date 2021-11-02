@@ -5,8 +5,20 @@ import torch.nn.functional as F
 
 class BaseModel(pl.LightningModule):
 
+    def __init__(self, optimizer):
+        super().__init__()
+        self.optimizer_name = optimizer
+
     def configure_optimizers(self):
-        optimizer = optim.Adagrad(filter(lambda p: p.requires_grad, self.parameters()), lr=1e-4)
+        params = filter(lambda p: p.requires_grad, self.parameters())
+        if self.optimizer_name == 'Adam':
+            optimizer = optim.Adam(params, lr=1e-4)
+        elif self.optimizer_name == 'Adadelta':
+            optimizer = optim.Adadelta(params)
+        elif self.optimizer_name == 'RMSprop':
+            optimizer = optim.RMSprop(params, momentum=0.9)
+        else:
+            raise NotImplementedError('Unsupported optimizer selection!')
         return optimizer
 
     def training_step(self, batch, batch_idx):

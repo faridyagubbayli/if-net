@@ -16,8 +16,8 @@ from models.base_model import BaseModel
 
 class ShapeNet32Vox(BaseModel):
 
-    def __init__(self, hidden_dim=256):
-        super(ShapeNet32Vox, self).__init__()
+    def __init__(self, optimizer_name, hidden_dim=256):
+        super(ShapeNet32Vox, self).__init__(optimizer_name)
 
         self.conv_1 = nn.Conv3d(1, 32, 3, padding=1)  # out: 32
         self.conv_1_1 = nn.Conv3d(32, 64, 3, padding=1)  # out: 32
@@ -95,8 +95,8 @@ class ShapeNet32Vox(BaseModel):
 
 class ShapeNet128Vox(BaseModel):
 
-    def __init__(self, hidden_dim=256):
-        super(ShapeNet128Vox, self).__init__()
+    def __init__(self, optimizer_name, hidden_dim=256):
+        super(ShapeNet128Vox, self).__init__(optimizer_name)
         # accepts 128**3 res input
         self.conv_in = nn.Conv3d(1, 16, 3, padding=1)  # out: 128
         self.conv_0 = nn.Conv3d(16, 32, 3, padding=1)  # out: 64
@@ -196,8 +196,8 @@ class ShapeNet128Vox(BaseModel):
 
 class ShapeNetPoints(BaseModel):
 
-    def __init__(self, hidden_dim=256):
-        super(ShapeNetPoints, self).__init__()
+    def __init__(self, optimizer_name, hidden_dim=256):
+        super(ShapeNetPoints, self).__init__(optimizer_name)
         # 128**3 res input
         self.conv_in = nn.Conv3d(1, 16, 3, padding=1, padding_mode='border')
         self.conv_0 = nn.Conv3d(16, 32, 3, padding=1, padding_mode='border')
@@ -298,8 +298,8 @@ class ShapeNetPoints(BaseModel):
 class SVR(BaseModel):
 
 
-    def __init__(self, hidden_dim=256):
-        super(SVR, self).__init__()
+    def __init__(self, optimizer_name, hidden_dim=256):
+        super(SVR, self).__init__(optimizer_name)
 
         self.conv_in = nn.Conv3d(1, 16, 3, padding=1, padding_mode='border')  # out: 256 ->m.p. 128
         self.conv_0 = nn.Conv3d(16, 32, 3, padding=1, padding_mode='border')  # out: 128

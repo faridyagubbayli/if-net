@@ -1,5 +1,5 @@
 #
-# Developed by Farid Yagubbayli <faridyagubbayli@gmail.com> | <farid.yagubbayli@tum.de>
+# Developed by Farid Yagubbayli <faridyagubbayli@gmail.com>
 #
 
 import argparse
@@ -38,10 +38,8 @@ model_map = {
     'ShapeNetPoints': model.ShapeNetPoints,
     'SVR': model.SVR,
 }
+net = model_map[args.model](args.optimizer)
 
-assert args.model in model_map
-
-net = model_map[args.model]()
 data_module = DataModule(args)
 
 logger = pl.loggers.TensorBoardLogger(save_dir='lightning_logs', name=form_expr_name(args))
