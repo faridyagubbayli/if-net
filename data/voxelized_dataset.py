@@ -15,7 +15,7 @@ class VoxelizedDataset(Dataset):
                  voxelized_pointcloud=False,
                  pointcloud_samples=3000,
                  data_path='/media/farid/ubuntu_data/',
-                 split_file='shapenet/split2.npz',
+                 split_file='shapenet/split_aeroplane_only.npz',
                  batch_size=64,
                  num_sample_points=1024,
                  num_workers=12,
