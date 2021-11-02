@@ -1,6 +1,5 @@
 import models.local_model as model
-import models.data.voxelized_data_shapenet as voxelized_data
-import numpy as np
+import data.voxelized_dataset as voxelized_data
 import argparse
 from models.generation import Generator
 from generation_iterator import gen_iterator
