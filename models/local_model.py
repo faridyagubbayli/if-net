@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from models.base_model import BaseModel
 
 # 1D convolution is used for the decoder. It acts as a standard FC, but allows to use a batch of point samples features,
 # additionally to the batch over the input objects.
@@ -11,7 +12,9 @@ import torch.nn.functional as F
 
 # ShapeNet Voxel Super-Resolution --------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------
-class ShapeNet32Vox(nn.Module):
+
+
+class ShapeNet32Vox(BaseModel):
 
     def __init__(self, hidden_dim=256):
         super(ShapeNet32Vox, self).__init__()
@@ -90,7 +93,7 @@ class ShapeNet32Vox(nn.Module):
 
         return out
 
-class ShapeNet128Vox(nn.Module):
+class ShapeNet128Vox(BaseModel):
 
     def __init__(self, hidden_dim=256):
         super(ShapeNet128Vox, self).__init__()
@@ -191,7 +194,7 @@ class ShapeNet128Vox(nn.Module):
 # ShapeNet Pointcloud Completion ---------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------
 
-class ShapeNetPoints(nn.Module):
+class ShapeNetPoints(BaseModel):
 
     def __init__(self, hidden_dim=256):
         super(ShapeNetPoints, self).__init__()
@@ -292,7 +295,7 @@ class ShapeNetPoints(nn.Module):
 # 3D Single View Reconsturction (for 256**3 input voxelization) --------------------------------------
 # ----------------------------------------------------------------------------------------------------
 
-class SVR(nn.Module):
+class SVR(BaseModel):
 
 
     def __init__(self, hidden_dim=256):
